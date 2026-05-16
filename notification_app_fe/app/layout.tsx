@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import Link from "next/link";
+import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Campus Notifications",
@@ -22,10 +21,10 @@ export default function RootLayout({
               Campus Notifications
             </Typography>
             <Box>
-              <Button color="inherit" component={Link} href="/">
+              <Button color="inherit" href="/">
                 Priority Inbox
               </Button>
-              <Button color="inherit" component={Link} href="/all">
+              <Button color="inherit" href="/all">
                 All Notifications
               </Button>
             </Box>
