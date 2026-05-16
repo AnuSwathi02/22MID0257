@@ -62,7 +62,7 @@ export default function PriorityInbox() {
       </Box>
 
       {loading ? (
-        <Box display="flex" justifyContent="center" mt={4}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           <CircularProgress />
         </Box>
       ) : topNotifications.length === 0 ? (

@@ -69,7 +69,7 @@ export default function AllNotifications() {
 
       {/* Notifications List */}
       {loading ? (
-        <Box display="flex" justifyContent="center" mt={4}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           <CircularProgress />
         </Box>
       ) : notifications.length === 0 ? (
