@@ -13,18 +13,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ margin: 0, padding: 0 }}>
         {/* Navigation Bar */}
         <AppBar position="static" color="primary">
-          <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+          <Toolbar sx={{ flexWrap: "wrap" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                flexGrow: 1,
+                fontWeight: 700,
+                fontSize: { xs: "14px", sm: "20px" },
+              }}
+            >
               Campus Notifications
             </Typography>
             <Box>
-              <Button color="inherit" href="/">
+              <Button
+                color="inherit"
+                href="/"
+                sx={{ fontSize: { xs: "11px", sm: "14px" } }}
+              >
                 Priority Inbox
               </Button>
-              <Button color="inherit" href="/all">
+              <Button
+                color="inherit"
+                href="/all"
+                sx={{ fontSize: { xs: "11px", sm: "14px" } }}
+              >
                 All Notifications
               </Button>
             </Box>
@@ -32,7 +47,9 @@ export default function RootLayout({
         </AppBar>
 
         {/* Page Content */}
-        {children}
+        <Box sx={{ px: { xs: 1, sm: 2, md: 4 }, py: 2 }}>
+          {children}
+        </Box>
       </body>
     </html>
   );

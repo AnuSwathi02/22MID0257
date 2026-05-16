@@ -23,7 +23,15 @@ export default function NotificationCard({ notification, isNew = false }: Props)
       }}
     >
       <CardContent>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box
+          sx = {{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 1
+          }}
+        >
           <Chip
             label={notification.Type}
             color={TYPE_COLORS[notification.Type]}
@@ -34,11 +42,22 @@ export default function NotificationCard({ notification, isNew = false }: Props)
           )}
         </Box>
 
-        <Typography variant="body1" sx={{ mt: 1, fontWeight: isNew ? 600 : 400 }}>
+        <Typography
+          variant="body1"
+          sx={{
+            mt: 1,
+            fontWeight: isNew ? 600 : 400,
+            fontSize: { xs: "14px", sm: "16px" },
+          }}
+        >
           {notification.Message}
         </Typography>
 
-        <Typography variant="caption" color="text.secondary">
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ fontSize: { xs: "11px", sm: "13px" } }}
+        >
           {new Date(notification.Timestamp).toLocaleString()}
         </Typography>
       </CardContent>
