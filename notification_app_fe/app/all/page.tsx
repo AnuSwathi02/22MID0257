@@ -34,13 +34,14 @@ export default function AllNotifications() {
       );
 
       // Track new vs seen
-      setNotifications(prev => {
-        const newIDs = new Set(data.map((n) => n.ID));
-        const prevIDs = new Set(prev.map((n) => n.ID));
-        const unseenIDs = new Set([...newIDs].filter(id => !prevIDs.has(id)));
-        setSeenIDs(prev => new Set([...prev, ...unseenIDs]));
-        return data;
-      });
+      const stored = localStorage.getItem("seenNotifications");
+const storedIDs: string[] = stored ? JSON.parse(stored) : [];
+const seenSet = new Set<string>(storedIDs);
+setSeenIDs(seenSet);
+
+const allIDs = data.map((n) => n.ID);
+localStorage.setItem("seenNotifications", JSON.stringify([...new Set([...storedIDs, ...allIDs])]));
+setNotifications(data);
 
       Log("frontend", "info", "page", `Loaded ${data.length} notifications`);
     } catch (error) {

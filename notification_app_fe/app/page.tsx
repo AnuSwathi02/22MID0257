@@ -24,10 +24,18 @@ export default function PriorityInbox() {
       setLoading(true);
       Log("frontend", "debug", "page", "Loading notifications for priority inbox");
       const data = await fetchNotifications();
-      setNotifications(data);
-      // Mark first load as seen
-      setSeenIDs(new Set(data.map((n) => n.ID)));
-      Log("frontend", "info", "page", `Loaded ${data.length} notifications successfully`);
+setNotifications(data);
+
+// Load previously seen IDs from localStorage
+const stored = localStorage.getItem("seenNotifications");
+const storedIDs: string[] = stored ? JSON.parse(stored) : [];
+const seenSet = new Set<string>(storedIDs);
+setSeenIDs(seenSet);
+
+// Save all current IDs as seen
+const allIDs = data.map((n) => n.ID);
+localStorage.setItem("seenNotifications", JSON.stringify([...new Set([...storedIDs, ...allIDs])]));
+      Log("frontend", "info", "page", `Loaded ${data.length} notifications`);
     } catch (error) {
       Log("frontend", "error", "page", `Failed to load notifications: ${error}`);
     } finally {
@@ -57,7 +65,7 @@ export default function PriorityInbox() {
             setTopN(val as number);
             Log("frontend", "info", "component", `Top N changed to ${val}`);
           }}
-          sx={{ width: 300 }}
+          sx={{ width: { xs: "100%", sm: 300 } }}
         />
       </Box>
 
